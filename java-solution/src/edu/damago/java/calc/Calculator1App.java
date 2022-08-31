@@ -2,7 +2,7 @@ package edu.damago.java.calc;
 
 
 /**
- * Facade for the non-interactive calculator text application.
+ * Facade for the non-interactive calculator text application,
  * based on runtime arguments and structured programming techniques.
  */
 public class Calculator1App {

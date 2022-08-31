@@ -7,9 +7,9 @@ import java.io.InputStreamReader;
 
 /**
  * Facade for the interactive calculator text application,
- * based on structured programming techniques.
+ * based on object-based programming techniques.
  */
-public class Calculator2App {
+public class Calculator3App {
 
 	/**
 	 * Application entry point.
@@ -63,40 +63,60 @@ public class Calculator2App {
 		final double rightOperator = Double.parseDouble(parameters[2].trim());
 
 		// process:  assign a new variable with the result of calling the calculate operation
-		final double result = calculate(operatorSymbol, leftOperator, rightOperator);
+		final BinaryOperator operator = new BinaryOperator(operatorSymbol);
+		final double result = operator.calculate(leftOperator, rightOperator);
 
 		// output:   print the calculation and it's result to sysout
 		System.out.format("%s %s %s = %s%n", leftOperator, operatorSymbol, rightOperator, result);
 	}
 
-
+	
+	
 	/**
-	 * Returns the result of the given calculation.
-	 * @param operatorSymbol the operator symbol
-	 * @param leftOperand the left operand
-	 * @param rightOperand the right operand
-	 * @return the calculation result
+	 * Instances represent binary operators, i.e. operators featuring
+	 * exactly two parameters.
 	 */
-	static public double calculate (final String operatorSymbol, final double leftOperand, final double rightOperand) {
-		switch (operatorSymbol) {
-			case "+":
-				return leftOperand + rightOperand;
-			case "-":
-				return leftOperand - rightOperand;
-			case "*":
-				return leftOperand * rightOperand;
-			case "/":
-				return leftOperand / rightOperand;
-			case "%":
-				return leftOperand % rightOperand;
-			case "**":
-				return Math.pow(leftOperand, rightOperand);
-			case "root":
-				return Math.pow(rightOperand, 1 / leftOperand);
-			case "log":
-				return Math.log(rightOperand) / Math.log(leftOperand);
-			default:
-				return Double.NaN;
+	static protected class BinaryOperator {
+		private final String symbol;
+
+		public BinaryOperator (final String symbol) {
+			super();
+			this.symbol = symbol;
+		}
+
+
+		public String symbol () {
+			return this.symbol;
+		}
+
+
+		/**
+		 * Returns the result of the given calculation.
+		 * @param leftOperand the left operand
+		 * @param rightOperand the right operand
+		 * @return the calculation result
+		 */
+		public double calculate (final double leftOperand, final double rightOperand) {
+			switch (this.symbol) {
+				case "+":
+					return leftOperand + rightOperand;
+				case "-":
+					return leftOperand - rightOperand;
+				case "*":
+					return leftOperand * rightOperand;
+				case "/":
+					return leftOperand / rightOperand;
+				case "%":
+					return leftOperand % rightOperand;
+				case "**":
+					return Math.pow(leftOperand, rightOperand);
+				case "root":
+					return Math.pow(rightOperand, 1 / leftOperand);
+				case "log":
+					return Math.log(rightOperand) / Math.log(leftOperand);
+				default:
+					return Double.NaN;
+			}
 		}
 	}
 }
